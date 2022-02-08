@@ -1,0 +1,58 @@
+numero = int(input('Número para converter: '))
+num_conversao = int(input('Digite 1 para Binário, 2 para Octal e 3 para Hexadecimal: '))
+binario = []
+hexadecimal = {10:'A', 11:'B', 12:'C', 13:'D', 14:'E', 15:'F'}
+num_hexa = []
+num_octal = []
+novo_numero = numero
+if num_conversao == 1:
+    novo_numero = numero//2
+    binario.append(numero % 2)
+    while True:
+        binario.append(novo_numero % 2)
+        novo_numero = novo_numero//2
+        if novo_numero == 0:
+            break
+        if novo_numero != 1:
+            continue
+        else:
+            binario.append(1)
+            break
+    (binario.reverse())
+    binario = [str(int) for int in binario]
+    binario = ''.join(binario)
+    print('O número {} em binário é {}'.format(numero, binario))
+elif num_conversao == 2:
+    if numero < 8:
+        print(numero)
+    elif numero >=8:
+        while novo_numero >= 8:
+            resto = novo_numero % 8
+            num_octal.append(resto)
+            novo_numero = novo_numero//8
+        num_octal.append(novo_numero)
+    num_octal.reverse()
+    num_octal = [str(int) for int in num_octal]
+    num_octal = ''.join(num_octal)
+    print('O número {} em octal é {}'.format(numero, num_octal))
+elif num_conversao == 3:
+    if numero <10:
+        print(numero)
+    elif 10 <= numero <= 15:
+        for key in hexadecimal:
+            if numero == key:
+                print(hexadecimal[key])
+    elif numero > 16:
+        while novo_numero >=16:
+            resto = novo_numero % 16
+            num_hexa.append(resto)
+            novo_numero = novo_numero//16
+        if novo_numero < 16 : num_hexa.append(novo_numero)
+        for key in hexadecimal:
+            for numero in range(len(num_hexa)):
+                if num_hexa[numero]== key:
+                    num_hexa[numero] = hexadecimal[key]
+        num_hexa = [str(int) for int in num_hexa]
+        num_hexa.reverse()
+        num_hexa = ''.join(num_hexa)
+        print('O número {} em hexadecimal é {}'.format(numero,num_hexa))
